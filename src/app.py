@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, json
 from flask_caching import Cache
 import os
 from flask_cors import CORS
@@ -32,16 +32,15 @@ def health():
 @app.get("/posts/fb")
 @cache.cached(timeout=300)
 def get_fb_posts():
-  page = graph_page.get_object(id=page_id, fields="posts{place,permalink_url,created_time,full_picture,id,attachments,message}")
+  page = graph_page.get_object(id=page_id, fields="posts{place,permalink_url,created_time,full_picture,id,attachments,message},picture,name")
 
   paging = page["posts"].pop("paging", None) # remove paging for now since it reveals api key
-  
   return page
 
 @app.get("/posts/ig")
 @cache.cached(timeout=300)
 def get_ig_posts():
-  page = graph_user.get_object(id=user_id, fields="media{media_type, media_url, timestamp, permalink, caption, children{media_type, media_url}}")
+  page = graph_user.get_object(id=user_id, fields="media{media_type, media_url, timestamp, permalink, caption, children{media_type, media_url}},profile_picture_url,name")
 
   paging = page["media"].pop("paging", None) # remove paging for now
 
