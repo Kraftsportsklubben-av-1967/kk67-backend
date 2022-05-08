@@ -15,7 +15,7 @@ $ sudo apt install python3.9
 2. Install dependecies
 
 ```sh
-$ pip -r requirments.txt
+$ pip install -r requirments.txt
 ```
 
 3. Setting up Flask environment
@@ -35,3 +35,7 @@ $ flask run
 ```
 
 Runs the app locally in development mode with file reload
+
+Open `localhost:5000` in your browser to request endpoints.
+
+I personally recommend **Insomnia** for advanced endpoint requesting
