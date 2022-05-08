@@ -1,3 +1,6 @@
 flask
+flask-cors
+Flask-Caching
 python-dotenv
 requests
+facebook-sdk
