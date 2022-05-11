@@ -1,4 +1,4 @@
-from flask import Flask, json
+from flask import Flask
 from flask_caching import Cache
 import os
 from flask_cors import CORS
@@ -45,3 +45,6 @@ def get_ig_posts():
   paging = page["media"].pop("paging", None) # remove paging for now
 
   return page
+
+if __name__ == "__main__":
+  app.run()
