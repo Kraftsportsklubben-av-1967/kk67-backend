@@ -12,3 +12,16 @@ The backend is a simple Python REST API developed with _Flask_
 This server is maintained by Marius Arhaug.
 
 To contribute to this project, follow the guidelines described in the [CONTRIBUTING.md](./CONTRIBUTING.md)
+
+## Endpoints
+
+Currently the REST API* supports these endpoints:
+
+```
+/health     # Get server health (TODO get actual health)
+/posts/fb   # Get facebook posts based on .env variables (we want kk67 posts)
+/posts/ig   # Get instagram posts --||--
+```
+
+> For more info about REST APIs check this [video](https://www.youtube.com/watch?v=-MTSQjw5DrM&t=377s&ab_channel=Fireship). 
+> Only the first 100 sec is about the concept of REST APIs..
