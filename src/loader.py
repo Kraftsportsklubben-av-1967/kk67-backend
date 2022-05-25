@@ -1,4 +1,3 @@
-from dataclasses import field
 import os
 import facebook as fb
 import requests
