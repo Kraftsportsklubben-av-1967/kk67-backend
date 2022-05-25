@@ -1,8 +1,7 @@
 from flask import Flask
 from flask_caching import Cache
-import os
 from flask_cors import CORS
-import facebook as fb
+from loader import load_posts_from_instagram, load_posts_from_facebook, update_paging
 
 config = {
   "CACHE_TYPE": "SimpleCache",
@@ -16,35 +15,23 @@ app.config["CORS_ORIGINS"] = ["https://www.kk-67.com", "http://localhost:3000"]
 app.config.from_mapping(config)
 cache = Cache(app)
 
-page_id = os.environ.get("FB_PAGE_ID")
-user_id = os.environ.get("FB_USER_ID")
-user_token = os.environ.get('FB_USER_KEY')
-page_token =  os.environ.get('FB_PAGE_KEY')
-
-graph_user = fb.GraphAPI(access_token=user_token, version="3.0")
-graph_page = fb.GraphAPI(access_token=page_token, version="3.0")
 
 @app.get("/")
 def health():
   return "Flask server running on Python 3.9"
 
-@app.get("/posts/fb")
+@app.get("/posts/fb/")
+@app.get("/posts/fb/<page_id>")
 @cache.cached(timeout=300)
-def get_fb_posts():
-  page = graph_page.get_object(id=page_id, fields="posts{place,permalink_url,created_time,full_picture,id,attachments,message},picture,name")
+def get_fb_posts(page_id=None):
+  return update_paging(load_posts_from_facebook(page_id), "posts")
 
-  paging = page["posts"].pop("paging", None) # remove paging for now since it reveals api key
-  
-  return page
 
-@app.get("/posts/ig")
+@app.get("/posts/ig/")
+@app.get("/posts/ig/<page_id>")
 @cache.cached(timeout=300)
-def get_ig_posts():
-  page = graph_user.get_object(id=user_id, fields="media{media_type, media_url, timestamp, permalink, caption, children{media_type, media_url}},profile_picture_url,name")
-
-  paging = page["media"].pop("paging", None) # remove paging for now
-
-  return page
+def get_ig_posts(page_id=None):
+  return update_paging(load_posts_from_instagram(page_id), "media")
 
 
 if __name__ == "__main__":
