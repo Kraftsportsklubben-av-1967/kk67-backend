@@ -33,13 +33,13 @@ def load_posts_from_instagram(pagination_token):
 
   # Restructure response to be the same as None case
 
-  profile = graph_user.get_object(id=user_id, fields="profile_picture_url,name")
+  resp = graph_user.get_object(id=user_id, fields="profile_picture_url,name")
     
   page = requests.get(graph_api_url.format(user_id, '/media', user_token, "media_type, media_url, timestamp, permalink, caption, children{media_type, media_url}", pagination_token)).json()
 
-  profile.update({"media": page})
+  resp["media"] = page
 
-  return profile 
+  return resp 
 
 def load_posts_from_facebook(pagination_token):
   if pagination_token is None:
@@ -47,11 +47,11 @@ def load_posts_from_facebook(pagination_token):
   
   # Restructure response to be the same as None case
 
-  profile = graph_page.get_object(id=page_id, fields="picture,name,id")
+  resp = graph_page.get_object(id=page_id, fields="picture,name,id")
   
   page = requests.get(graph_api_url.format(page_id, '/posts', page_token, "place,permalink_url,created_time,full_picture,id,attachments,message", pagination_token)).json()
 
-  profile.update({"posts": page})
+  resp["posts"] = page
 
-  return profile
+  return resp
 
