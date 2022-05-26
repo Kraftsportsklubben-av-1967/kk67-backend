@@ -1,3 +1,4 @@
+from pydoc import pager
 from flask import Flask
 from flask_caching import Cache
 from flask_cors import CORS
@@ -21,18 +22,22 @@ def health():
   return "Flask server running on Python 3.9"
 
 @app.get("/posts/fb/")
-@app.get("/posts/fb/<page_id>")
 @cache.cached(timeout=300)
-def get_fb_posts(page_id=None):
-  return update_paging(load_posts_from_facebook(page_id), "posts")
-
+def get_fb_posts():
+  return update_paging(load_posts_from_facebook(None), "posts")
 
 @app.get("/posts/ig/")
-@app.get("/posts/ig/<page_id>")
 @cache.cached(timeout=300)
-def get_ig_posts(page_id=None):
-  return update_paging(load_posts_from_instagram(page_id), "media")
+def get_ig_posts():
+  return update_paging(load_posts_from_instagram(None), "media")
 
+@app.get("/posts/fb/<page_id>")
+def get_fb_posts_page(page_id):
+  return update_paging(load_posts_from_facebook(page_id), "posts")
+
+@app.get("/posts/ig/<page_id>")
+def get_ig_posts_page(page_id):
+  return update_paging(load_posts_from_instagram(page_id), "media")
 
 if __name__ == "__main__":
   app.run()
