@@ -1,6 +1,6 @@
 # KK-67 Backend
 
-IThe KK-67 backend is a simple Python REST API developed with _Flask_. It was made due to our ISP only using the Python runetime at the current billing plan...
+The KK-67 backend is a simple Python REST API developed with _Flask_. It was made due to our ISP only using the Python runetime at the current billing plan...
 
 Its purpose is to fetch data from the Facebook Graph API. Allowing the kk67-frontend to display data from KK-67's facebook and instagram profiles such as various posts. 
 
