@@ -8,10 +8,10 @@ try:
 except Exception as err:
     smtp_ssl = None
 
-formEmail = os.environ.get("FORM_EMAIL")
-formEmailPassword = os.environ.get("FORM_EMAIL_PASSWORD")
+form_email = os.environ.get("FORM_EMAIL")
+form_email_password = os.environ.get("FORM_EMAIL_PASSWORD")
 
-resp_code, resp = smtp_ssl.login(user=formEmail, password=formEmailPassword)
+resp_code, resp = smtp_ssl.login(user=form_email, password=form_email_password)
 
 
 def send_email(data):
@@ -27,4 +27,4 @@ def send_email(data):
     except Exception as err:
         return json.dump({"code": 501, "message": type(err).__name__})
     
-    return json.dump({"code": 200, "message": ""})
+    return json.dump({"code": 200, "message": "OK"})
