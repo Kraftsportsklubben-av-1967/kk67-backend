@@ -24,6 +24,8 @@ Currently the REST API\* supports these endpoints:
 
 /posts/fb/<pagination_token>   # Get facebook posts based on pagination token
 /posts/ig/<pagination_token>   # Get instagram posts --||--
+
+/join       # Post form information and send email from FORM_EMAIL, FORM_EMAIL_PASSWORD in .env
 ```
 
 > For more info about REST APIs check this [video](https://www.youtube.com/watch?v=-MTSQjw5DrM&t=377s&ab_channel=Fireship).
