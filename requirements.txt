@@ -1,5 +1,5 @@
 facebook-sdk==3.1.0
-Flask==2.1.2
+Flask==2.2.2
 Flask-Caching==1.10.1
 Flask-Cors==3.0.10
 python-dotenv==0.20.0
@@ -7,3 +7,4 @@ requests==2.22.0
 Pillow==9.0.1
 Markdown==3.1.1
 markupsafe==2.0.1
+Werkzeug==2.3.7
