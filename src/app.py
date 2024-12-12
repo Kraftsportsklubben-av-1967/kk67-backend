@@ -3,6 +3,8 @@ from flask import Flask
 from flask_caching import Cache
 from flask_cors import CORS
 from loader import load_posts_from_instagram, load_posts_from_facebook, update_paging
+from flask import request
+from emailer import send_email
 
 config = {
   "CACHE_TYPE": "SimpleCache",
@@ -39,5 +41,9 @@ def get_fb_posts_page(page_id):
 def get_ig_posts_page(page_id):
   return update_paging(load_posts_from_instagram(page_id), "media")
 
+@app.route("/join", methods=["POST"])
+def process_form():
+  return send_email(request.json)
+  
 if __name__ == "__main__":
   app.run()
