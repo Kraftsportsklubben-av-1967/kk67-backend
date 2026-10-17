@@ -23,20 +23,20 @@ FB_PAGE_ID=<id>
 
 ## Local development
 
-This project is written in Python 3.9 with the Flask
+This project uses Python 3.12 and Flask.
 
-1. Install python3.9
+1. Install Python 3.12
 
 Ubuntu
 
 ```sh
-$ sudo apt install python3.9
+$ sudo apt install python3.12
 ```
 
 2. Install dependencies
 
 ```sh
-$ pip install -r requirments.txt
+$ pip install -r requirements.txt
 ```
 
 3. Setting up Flask environment
@@ -46,7 +46,7 @@ $ export FLASK_APP=src/app.py
 ```
 
 ```sh
-$ export FLASK_ENV=development
+$ export FLASK_DEBUG=1
 ```
 
 4. Setup environment variables in a `.env` file (**not** to be pushed to the repo). Ask **Marius** for key(s)/id(s)
@@ -69,3 +69,12 @@ Runs the app locally in development mode with file reload
 Open `localhost:5000` in your browser to request endpoints.
 
 I personally recommend **Insomnia** for advanced endpoint requesting
+
+## Checks
+
+After installing the dependencies, run the request and cache checks without
+Facebook credentials or network calls:
+
+```sh
+python -m unittest discover -s tests
+```
