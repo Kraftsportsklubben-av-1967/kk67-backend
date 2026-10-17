@@ -1,4 +1,3 @@
-from pydoc import pager
 from flask import Flask
 from flask_caching import Cache
 from flask_cors import CORS
@@ -9,17 +8,17 @@ config = {
   "CACHE_DEFAULT_TIMEOUT": 300
 }
 
-app = Flask(__name__)
-CORS(app)
+ALLOWED_ORIGINS = ["https://www.kk-67.com", "http://localhost:3000"]
 
-app.config["CORS_ORIGINS"] = ["https://www.kk-67.com", "http://localhost:3000"]
+app = Flask(__name__)
 app.config.from_mapping(config)
+CORS(app, origins=ALLOWED_ORIGINS)
 cache = Cache(app)
 
 
 @app.get("/")
 def health():
-  return "Flask server running on Python 3.9"
+  return "Flask server running on Python 3.12"
 
 @app.get("/posts/fb/")
 @cache.cached(timeout=300)
